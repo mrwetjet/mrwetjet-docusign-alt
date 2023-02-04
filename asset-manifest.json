@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/docusign-alt/static/css/main.7962fe82.css",
+    "main.css": "/docusign-alt/static/css/main.2bcd8f71.css",
     "main.js": "/docusign-alt/static/js/main.30a29b35.js",
     "static/js/787.8d9a80a1.chunk.js": "/docusign-alt/static/js/787.8d9a80a1.chunk.js",
     "index.html": "/docusign-alt/index.html",
-    "main.7962fe82.css.map": "/docusign-alt/static/css/main.7962fe82.css.map",
+    "main.2bcd8f71.css.map": "/docusign-alt/static/css/main.2bcd8f71.css.map",
     "main.30a29b35.js.map": "/docusign-alt/static/js/main.30a29b35.js.map",
     "787.8d9a80a1.chunk.js.map": "/docusign-alt/static/js/787.8d9a80a1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7962fe82.css",
+    "static/css/main.2bcd8f71.css",
     "static/js/main.30a29b35.js"
   ]
 }
