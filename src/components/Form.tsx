@@ -66,7 +66,13 @@ enum LoadingStatus {
 }
 
 interface Props {
-  onPdfSubmit: (pdf: Uint8Array) => void;
+  onPdfSubmit: ({
+    pdf,
+    userEmail,
+  }: {
+    pdf: Uint8Array;
+    userEmail: string;
+  }) => void;
 }
 
 interface RenderDropdownWithDeleteButtonProps extends TextProps {
@@ -191,7 +197,9 @@ export default function Form({ onPdfSubmit }: Props) {
       onClick: () => closeSnackbar(success),
     });
     if (pdfBytes) {
-      onPdfSubmit(pdfBytes);
+      const userEmail = formState.email.pop();
+      if (!userEmail) throw Error("Must have an email!");
+      onPdfSubmit({ pdf: pdfBytes, userEmail });
     }
   };
 
