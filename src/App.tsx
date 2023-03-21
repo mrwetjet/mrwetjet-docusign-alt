@@ -19,6 +19,11 @@ import Form from "./components/Form";
 
 import "./App.css";
 
+interface EmailParameters {
+  pdf: Uint8Array;
+  userEmail: string;
+}
+
 /**
  *
  * @returns JSX.Element
@@ -60,25 +65,31 @@ export default function App() {
  * @returns JSX.Element
  */
 function Body() {
-  const [pdf, setPdf] = useState<Uint8Array>();
+  const [emailParameters, setEmailParameters] = useState<EmailParameters>();
 
   /**
    * Hanlder to close dialog
    */
   const handleDialogClose = () => {
-    setPdf(undefined);
+    setEmailParameters(undefined);
   };
 
   /**
    * Handler to change PDF bytes
    */
-  const handlePdfChange = useCallback((pdf: Uint8Array) => {
-    setPdf(pdf);
+  const handlePdfChange = useCallback((params: EmailParameters) => {
+    setEmailParameters(params);
   }, []);
 
   return (
     <>
-      {pdf && <DialogDisclaimer pdf={pdf} onClose={handleDialogClose} />}
+      {emailParameters?.pdf && emailParameters?.userEmail && (
+        <DialogDisclaimer
+          userEmail={emailParameters.userEmail}
+          pdf={emailParameters.pdf}
+          onClose={handleDialogClose}
+        />
+      )}
       <Container>
         <Form onPdfSubmit={handlePdfChange} />
       </Container>
