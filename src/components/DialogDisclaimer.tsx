@@ -20,6 +20,7 @@ import { openPDFInSeparateTab, sendMail } from "../utils";
 
 interface Props {
   pdf: Uint8Array;
+  userEmail: string;
   onClose: () => void;
 }
 
@@ -28,10 +29,11 @@ interface Props {
  *
  * @param props -
  * @param props.pdf - Byte array of PDF's
+ * @param props.userEmail - Email of the user submitting the waiver
  * @param props.onClose - Close dialog
  * @returns JSX.Element
  */
-export default function DialogDisclaimer({ pdf, onClose }: Props) {
+export default function DialogDisclaimer({ pdf, userEmail, onClose }: Props) {
   const [hasUserAgreed, setHasUserAgreed] = useState<boolean>(false);
   const [hasUserViewed, setHasUserViewed] = useState<boolean>(false);
   const [sending, setSending] = useState<boolean>(false);
@@ -47,9 +49,10 @@ export default function DialogDisclaimer({ pdf, onClose }: Props) {
     try {
       await sendMail({
         attachment: pdf,
-        message: "",
-        recipients: [],
-        subject: "",
+        message:
+          "Thank you for taking the time to complete the rental agreement for Mr. Wet Jet.\n\nLets get wet!",
+        recipients: [userEmail, "mr.wetjet01@gmail.com"],
+        subject: "Completed Mr. Wet Jet Rental Agreement",
       });
       const success = enqueueSnackbar("Successfully submitted document!", {
         variant: "success",
