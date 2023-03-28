@@ -1,7 +1,7 @@
 {
   "name": "docusign",
   "version": "0.1.0",
-  "homepage": "https://mrwetjet.github.io/docusign-alt",
+  "homepage": "https://mrwetjet.github.io/mrwetjet-docusign-alt",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
