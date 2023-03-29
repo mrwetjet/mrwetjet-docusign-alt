@@ -160,7 +160,7 @@ async function sendMail({
   recipients,
   subject,
 }: EmailMessageProps): Promise<number> {
-  const response = await fetch("server-to-forward-email", {
+  const response = await fetch("https://empirical-weft-381301.ue.r.appspot.com/send_mail", {
     method: "POST",
     mode: "cors",
     credentials: "omit",
