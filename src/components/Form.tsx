@@ -199,7 +199,7 @@ export default function Form({ onPdfSubmit }: Props) {
       onClick: () => closeSnackbar(success),
     });
     if (pdfBytes) {
-      const userEmail = formState.email.pop();
+      const userEmail = formState.email[0];
       if (!userEmail) throw Error("Must have an email!");
       onPdfSubmit({ pdf: pdfBytes, userEmail });
     }
