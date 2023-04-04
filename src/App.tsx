@@ -1,18 +1,13 @@
-import { type ChangeEvent, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   Container,
   createTheme,
   CssBaseline,
   type Theme,
   ThemeProvider,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Switch,
+  Box,
 } from "@mui/material";
-import { SnackbarProvider, useSnackbar } from "notistack";
-import MenuIcon from "@mui/icons-material/Menu";
+import { SnackbarProvider } from "notistack";
 
 import DialogDisclaimer from "./components/DialogDisclaimer";
 import Form from "./components/Form";
@@ -29,31 +24,32 @@ interface EmailParameters {
  * @returns JSX.Element
  */
 export default function App() {
-  const [mode, setMode] = useState<"dark" | "light">("dark");
-
   /**
    * Theme object
    */
   const THEME: Theme = createTheme({
-    palette: {
-      mode,
+    typography: {
+      fontFamily: `"Montserrat"`,
+      fontSize: 15,
+      fontWeightLight: 500,
+      fontWeightRegular: 500,
+      fontWeightMedium: 900,
     },
   });
-
-  /**
-   *
-   * @param _ - Unused event
-   * @param checked - Whether the slider is on or off
-   */
-  const handleLightingChange = (_: ChangeEvent, checked: boolean) => {
-    setMode(checked ? "light" : "dark");
-  };
 
   return (
     <ThemeProvider theme={THEME}>
       <CssBaseline />
       <SnackbarProvider maxSnack={3}>
-        <Header mode={mode} onLightingChange={handleLightingChange} />
+        <Box
+          sx={{ width: { xs: "100%", sm: "50%", md: "450px" }, px: 5, pt: 1 }}
+        >
+          <img
+            src="https://assets.cdn.filesafe.space/6ltD4tW4ej1bPro4eqCz/media/63dea2bbdea9bc4f59fa58ab.png"
+            height="auto"
+            width="100%"
+          ></img>
+        </Box>
         <Body />
       </SnackbarProvider>
     </ThemeProvider>
@@ -68,7 +64,7 @@ function Body() {
   const [emailParameters, setEmailParameters] = useState<EmailParameters>();
 
   /**
-   * Hanlder to close dialog
+   * Handler to close dialog
    */
   const handleDialogClose = () => {
     setEmailParameters(undefined);
@@ -90,51 +86,18 @@ function Body() {
           onClose={handleDialogClose}
         />
       )}
-      <Container>
-        <Form onPdfSubmit={handlePdfChange} />
-      </Container>
-    </>
-  );
-}
-
-/**
- *
- * @param props -
- * @param props.mode - Dark or light
- * @param props.onLightingChange - Change handler
- * @returns JSX.Element
- */
-function Header({
-  mode,
-  onLightingChange,
-}: {
-  mode: "dark" | "light";
-  onLightingChange: (_: ChangeEvent, checked: boolean) => void;
-}) {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  return (
-    <>
-      <AppBar>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            sx={{ mr: 2 }}
-            onClick={() => {
-              const id = enqueueSnackbar("Not implemented yet.", {
-                onClick: () => closeSnackbar(id),
-              });
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            <b style={{ textTransform: "capitalize" }}>{mode}</b>&nbsp;Mode
-          </Typography>
-          <Switch onChange={onLightingChange} color="default" />
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
+      <Box
+        sx={{
+          backgroundColor: "rgba(0,0,0,0)",
+          overflowY: "scroll",
+          maxHeight: "100vh",
+          pb: 15,
+        }}
+      >
+        <Container>
+          <Form onPdfSubmit={handlePdfChange} />
+        </Container>
+      </Box>
     </>
   );
 }
