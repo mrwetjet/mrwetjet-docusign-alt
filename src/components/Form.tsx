@@ -89,6 +89,8 @@ interface TextProps {
 // ------------------------------------------------
 // Styled components
 const StyledPaper = styled(Paper)(({ theme }) => ({
+  backgroundColor: "rgba(255,255,255,0.85)",
+  backdropFilter: "blur(7px)",
   padding: theme.spacing(5),
   margin: theme.spacing(1),
   display: "flex",
@@ -266,7 +268,7 @@ export default function Form({ onPdfSubmit }: Props) {
       <Button
         sx={{ padding: (theme) => theme.spacing(3) }}
         onClick={handleSubmit}
-        variant="outlined"
+        variant="contained"
         fullWidth
       >
         Submit Document
