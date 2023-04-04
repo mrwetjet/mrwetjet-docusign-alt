@@ -42,7 +42,12 @@ export default function App() {
       <CssBaseline />
       <SnackbarProvider maxSnack={3}>
         <Box
-          sx={{ width: { xs: "100%", sm: "50%", md: "450px" }, px: 5, pt: 1 }}
+          sx={{
+            width: { xs: "100%", sm: "50%", md: "450px" },
+            px: 5,
+            pt: 1,
+            pointerEvents: "none",
+          }}
         >
           <img
             src="https://assets.cdn.filesafe.space/6ltD4tW4ej1bPro4eqCz/media/63dea2bbdea9bc4f59fa58ab.png"
@@ -90,8 +95,11 @@ function Body() {
         sx={{
           backgroundColor: "rgba(0,0,0,0)",
           overflowY: "scroll",
-          maxHeight: "100vh",
-          pb: 15,
+          maxHeight: {
+            xs: "calc(90vh - 100px)",
+            sm: "calc(95vh - 100px)",
+            md: "calc(100vh - 100px)",
+          },
         }}
       >
         <Container>
