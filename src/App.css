@@ -2,6 +2,14 @@ input {
   all: unset;
 }
 
+body {
+  background: url(https://assets.cdn.filesafe.space/6ltD4tW4ej1bPro4eqCz/media/62c1ed2ebc9ee196b6afb127.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
 .react-pdf__Page__canvas {
   width: 100% !important;
   height: 100% !important;
