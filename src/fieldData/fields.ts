@@ -237,5 +237,5 @@ export const FORM_DATA: Form = {
       inputType: "text",
     },
   },
-  title: "Mr. Wet Jet Liability Waiver",
+  title: "Rental Agreement",
 };
