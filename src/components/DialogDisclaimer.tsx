@@ -58,7 +58,7 @@ export default function DialogDisclaimer({ pdf, userEmail, onClose }: Props) {
         variant: "success",
         onClick: () => closeSnackbar(success),
       });
-      alert("You can now safely close browser!");
+      setTimeout(() => alert("You can now safely close browser!"), 1000);
     } catch (error) {
       const failure = enqueueSnackbar(
         "Failed to submit document, please contact your representative.",
