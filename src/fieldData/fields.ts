@@ -80,7 +80,7 @@ export const FORM_DATA: Form = {
     },
     date_of_birth: {
       coordinates: [
-        { coordinate: [349, 225], page: 6 },
+        { coordinate: [345, 225], page: 6 },
         { coordinate: [352, 537], page: 9 },
       ],
       inputType: "date",
@@ -218,10 +218,10 @@ export const FORM_DATA: Form = {
     },
     minor_birthday: {
       coordinates: [
-        { coordinate: [345, 462], page: 9 },
-        { coordinate: [345, 428], page: 9 },
-        { coordinate: [345, 392], page: 9 },
-        { coordinate: [342, 356], page: 9 },
+        { coordinate: [338, 462], page: 9 },
+        { coordinate: [338, 428], page: 9 },
+        { coordinate: [338, 392], page: 9 },
+        { coordinate: [338, 356], page: 9 },
       ],
       minCount: 1,
       renderFieldInPDF: true,
@@ -229,10 +229,10 @@ export const FORM_DATA: Form = {
     },
     minor_relation_to_user: {
       coordinates: [
-        { coordinate: [468, 462], page: 9 },
-        { coordinate: [468, 428], page: 9 },
-        { coordinate: [468, 392], page: 9 },
-        { coordinate: [468, 356], page: 9 },
+        { coordinate: [465, 462], page: 9 },
+        { coordinate: [465, 428], page: 9 },
+        { coordinate: [465, 392], page: 9 },
+        { coordinate: [465, 356], page: 9 },
       ],
       minCount: 1,
       renderFieldInPDF: true,
