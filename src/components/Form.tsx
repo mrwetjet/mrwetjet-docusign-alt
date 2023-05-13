@@ -42,6 +42,7 @@ export interface FieldState {
 }
 
 interface FieldsProps {
+  errorID?: string;
   onFormStateChange: (params: FieldStateChangeProps) => void;
 }
 
@@ -102,6 +103,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
  */
 export default function Form({ onPdfSubmit }: Props) {
   const [formState, setFormState] = useState<FieldState>();
+  const [error, setError] = useState<string | undefined>();
   const [loading, setLoading] = useState<LoadingStatus>(
     LoadingStatus.Unfulfilled
   );
@@ -161,10 +163,14 @@ export default function Form({ onPdfSubmit }: Props) {
           identifiedFieldData.maxCount ||
           identifiedFieldData.coordinates.length;
 
-        return (
+        const fieldIsValid =
           minCount <= userEnteredValue.length &&
-          maxCount >= userEnteredValue.length
-        );
+          maxCount >= userEnteredValue.length;
+
+        // Error the field that didn't validate
+        !fieldIsValid && setError(key);
+
+        return fieldIsValid;
       }
     );
 
@@ -175,6 +181,9 @@ export default function Form({ onPdfSubmit }: Props) {
       });
       return;
     }
+
+    // We successfully verified fields
+    setError(undefined);
 
     const id = enqueueSnackbar("Generating PDF...", {
       variant: "info",
@@ -258,7 +267,7 @@ export default function Form({ onPdfSubmit }: Props) {
       <Divider sx={{ m: 3 }} />
 
       {loading === LoadingStatus.Fulfilled ? (
-        <PureFields onFormStateChange={handleFormStateChange} />
+        <PureFields errorID={error} onFormStateChange={handleFormStateChange} />
       ) : null}
 
       <Button
@@ -294,10 +303,12 @@ const PureField = memo(Field);
  * Collection of `Field` components
  *
  * @param props -
+ * @param props.errorID - The ID of the field that has errored when submitted
  * @param props.onFormStateChange - Handler for changing the parent's state
  * @returns JSX.Element
  */
-function Fields({ onFormStateChange }: FieldsProps) {
+function Fields({ errorID, onFormStateChange }: FieldsProps) {
+  // console.log("Fields#render");
   return (
     <>
       {Object.entries(FORM_DATA.fields)
@@ -349,6 +360,7 @@ function Fields({ onFormStateChange }: FieldsProps) {
                 return (
                   <PureField
                     key={uniqueID}
+                    errorID={errorID}
                     fieldIdentifier={key}
                     index={index}
                     inputType={inputType}
@@ -460,6 +472,7 @@ function Fields({ onFormStateChange }: FieldsProps) {
                           <Box key={uniqueID + key}>
                             <Typography>{toPascalCase(key)}</Typography>
                             <PureField
+                              errorID={errorID}
                               fieldIdentifier={key}
                               index={index}
                               inputType={props.inputType}
@@ -486,16 +499,17 @@ function Fields({ onFormStateChange }: FieldsProps) {
  * Individual field component
  *
  * @param props -
+ * @param props.errorID - The ID of the field that has errored when submitted
  * @param props.fieldIdentifier - The field's unique identifier
  * @param props.index - The index of the field, for updating state management
  * @param props.inputType - The input type of the field
- *
  * @param props.required - Whether the field is required, if so the field cannot be deleted
  * @param props.onDelete - Delete function, also used to see if the field can be deleted (if function is undefined, no delete button will be rendered)
  * @param props.onFormStateChange - Change handler for updating the top-level
  * @returns JSX.Element
  */
 function Field({
+  errorID,
   fieldIdentifier,
   index,
   inputType,
@@ -504,8 +518,10 @@ function Field({
   onDelete,
   onFormStateChange,
 }: FieldProps) {
+  // console.log("Field#render");
   const [value, setValue] = useState<string>("");
-  const errored = required && value === undefined;
+  const errored =
+    (required && value === undefined) || errorID === fieldIdentifier;
 
   /**
    * Change handler
