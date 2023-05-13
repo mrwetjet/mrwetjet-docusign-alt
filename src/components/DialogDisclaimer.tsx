@@ -18,9 +18,10 @@ import { useState } from "react";
 
 import { openPDFInSeparateTab, sendMail } from "../utils";
 
+import type { EmailParameters } from "../App";
+
 interface Props {
-  pdf: Uint8Array;
-  userEmail: string;
+  emailParameters: EmailParameters;
   onClose: () => void;
 }
 
@@ -33,7 +34,10 @@ interface Props {
  * @param props.onClose - Close dialog
  * @returns JSX.Element
  */
-export default function DialogDisclaimer({ pdf, userEmail, onClose }: Props) {
+export default function DialogDisclaimer({
+  emailParameters: { pdf, userEmail, userName },
+  onClose,
+}: Props) {
   const [hasUserAgreed, setHasUserAgreed] = useState<boolean>(false);
   const [hasUserViewed, setHasUserViewed] = useState<boolean>(false);
   const [sending, setSending] = useState<boolean>(false);
@@ -52,7 +56,7 @@ export default function DialogDisclaimer({ pdf, userEmail, onClose }: Props) {
         message:
           "Thank you for taking the time to complete the rental agreement for Mr. Wet Jet.\n\nLets get wet!",
         recipients: [userEmail, "mr.wetjet01@gmail.com"],
-        subject: "Completed Mr. Wet Jet Rental Agreement",
+        subject: `${userName} completed the Mr. Wet Jet Rental Agreement!`,
       });
       const success = enqueueSnackbar("Successfully submitted document!", {
         variant: "success",

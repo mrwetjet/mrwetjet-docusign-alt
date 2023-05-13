@@ -36,6 +36,7 @@ import {
   writeDataToPdf,
 } from "../utils";
 
+import type { EmailParameters } from "../App";
 export interface FieldState {
   [fieldIdentifier: string]: Array<string>;
 }
@@ -66,13 +67,7 @@ enum LoadingStatus {
 }
 
 interface Props {
-  onPdfSubmit: ({
-    pdf,
-    userEmail,
-  }: {
-    pdf: Uint8Array;
-    userEmail: string;
-  }) => void;
+  onPdfSubmit: (params: EmailParameters) => void;
 }
 
 interface RenderDropdownWithDeleteButtonProps extends TextProps {
@@ -200,8 +195,9 @@ export default function Form({ onPdfSubmit }: Props) {
     });
     if (pdfBytes) {
       const userEmail = formState.email[0];
-      if (!userEmail) throw Error("Must have an email!");
-      onPdfSubmit({ pdf: pdfBytes, userEmail });
+      const fullName = formState.full_name[0];
+      if (!(userEmail && fullName)) throw Error("Must have an email and name!");
+      onPdfSubmit({ pdf: pdfBytes, userEmail, userName: fullName });
     }
   };
 

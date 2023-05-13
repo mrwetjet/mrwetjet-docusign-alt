@@ -125,9 +125,9 @@ function isUserFieldObject(
  * @returns Promise<PDFDocument>
  */
 async function loadPdf(): Promise<PDFDocument> {
-  const arrayBuffer = await fetch("/mrwetjet-docusign-alt/pdf/waiver.pdf").then((res) =>
-    res.arrayBuffer()
-  );
+  const arrayBuffer = await fetch(
+    "/mrwetjet-docusign-alt/pdf/waiver_may_12_2023.pdf"
+  ).then((res) => res.arrayBuffer());
   const doc = await PDFDocument.load(arrayBuffer);
   return doc;
 }
@@ -160,20 +160,23 @@ async function sendMail({
   recipients,
   subject,
 }: EmailMessageProps): Promise<number> {
-  const response = await fetch("https://empirical-weft-381301.ue.r.appspot.com/send_email", {
-    method: "POST",
-    mode: "cors",
-    credentials: "omit",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      attachment: Array.from(attachment),
-      message,
-      recipients,
-      subject,
-    }),
-  });
+  const response = await fetch(
+    "https://empirical-weft-381301.ue.r.appspot.com/send_email",
+    {
+      method: "POST",
+      mode: "cors",
+      credentials: "omit",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        attachment: Array.from(attachment),
+        message,
+        recipients,
+        subject,
+      }),
+    }
+  );
 
   return response.status;
 }

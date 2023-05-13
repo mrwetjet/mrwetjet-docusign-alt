@@ -14,9 +14,10 @@ import Form from "./components/Form";
 
 import "./App.css";
 
-interface EmailParameters {
+export interface EmailParameters {
   pdf: Uint8Array;
   userEmail: string;
+  userName: string;
 }
 
 /**
@@ -86,8 +87,7 @@ function Body() {
     <>
       {emailParameters?.pdf && emailParameters?.userEmail && (
         <DialogDisclaimer
-          userEmail={emailParameters.userEmail}
-          pdf={emailParameters.pdf}
+          emailParameters={emailParameters}
           onClose={handleDialogClose}
         />
       )}

@@ -15,28 +15,29 @@ export const FORM_DATA: Form = {
   fields: {
     date: {
       coordinates: [
-        { coordinate: [395, 679], page: 1 },
-        { coordinate: [469, 155], page: 4 },
-        { coordinate: [469, 99], page: 4 },
-        { coordinate: [411, 130], page: 5 },
-        { coordinate: [380, 529], page: 6 },
-        { coordinate: [448, 489], page: 6 },
-        { coordinate: [363, 512], page: 8 },
+        { coordinate: [363, 50], page: 1 },
+        { coordinate: [395, 679], page: 2 },
+        { coordinate: [469, 155], page: 5 },
+        { coordinate: [469, 99], page: 5 },
+        { coordinate: [411, 130], page: 6 },
+        { coordinate: [380, 529], page: 7 },
+        { coordinate: [448, 489], page: 7 },
+        { coordinate: [363, 512], page: 9 },
       ],
       default: [new Date().toLocaleDateString()],
       renderFieldInPDF: false,
     },
     owner_signature: {
-      coordinates: [{ coordinate: [135, 155], page: 4 }],
+      coordinates: [{ coordinate: [135, 155], page: 5 }],
       default: ["Rayvon Solomon"],
       renderFieldInPDF: false,
     },
     full_name: {
       coordinates: [
-        { coordinate: [168, 638], page: 1 },
-        { coordinate: [92, 225], page: 5 },
-        { coordinate: [39, 258], page: 7 },
-        { coordinate: [221, 614], page: 8 },
+        { coordinate: [168, 638], page: 2 },
+        { coordinate: [92, 225], page: 6 },
+        { coordinate: [39, 258], page: 8 },
+        { coordinate: [221, 614], page: 9 },
       ],
       inputType: "text",
       renderFieldInPDF: true,
@@ -44,14 +45,14 @@ export const FORM_DATA: Form = {
       maxCount: 1,
     },
     age: {
-      coordinates: [{ coordinate: [463, 638], page: 1 }],
+      coordinates: [{ coordinate: [463, 638], page: 2 }],
       inputType: "number",
       renderFieldInPDF: true,
       minCount: 1,
       maxCount: 1,
     },
     location: {
-      coordinates: [{ coordinate: [78, 420], page: 2 }],
+      coordinates: [{ coordinate: [78, 420], page: 3 }],
       inputType: "text",
       renderFieldInPDF: true,
       minCount: 1,
@@ -67,19 +68,20 @@ export const FORM_DATA: Form = {
 
     signature: {
       coordinates: [
-        { coordinate: [135, 99], page: 4 },
-        { coordinate: [134, 130], page: 5 },
-        { coordinate: [40, 529], page: 6 },
-        { coordinate: [38, 489], page: 6 },
-        { coordinate: [92, 512], page: 8 },
+        { coordinate: [62, 50], page: 1 },
+        { coordinate: [135, 99], page: 5 },
+        { coordinate: [134, 130], page: 6 },
+        { coordinate: [40, 529], page: 7 },
+        { coordinate: [38, 489], page: 7 },
+        { coordinate: [92, 512], page: 9 },
       ],
       default: ["full_name"],
       renderFieldInPDF: false,
     },
     date_of_birth: {
       coordinates: [
-        { coordinate: [349, 225], page: 5 },
-        { coordinate: [352, 537], page: 8 },
+        { coordinate: [349, 225], page: 6 },
+        { coordinate: [352, 537], page: 9 },
       ],
       inputType: "date",
       renderFieldInPDF: true,
@@ -88,8 +90,8 @@ export const FORM_DATA: Form = {
     },
     phone_number: {
       coordinates: [
-        { coordinate: [473, 225], page: 5 },
-        { coordinate: [123, 537], page: 8 },
+        { coordinate: [473, 225], page: 6 },
+        { coordinate: [123, 537], page: 9 },
       ],
       inputType: "tel",
       renderFieldInPDF: true,
@@ -98,8 +100,8 @@ export const FORM_DATA: Form = {
     },
     address: {
       coordinates: [
-        { coordinate: [77, 193], page: 5 },
-        { coordinate: [82, 588], page: 8 },
+        { coordinate: [77, 193], page: 6 },
+        { coordinate: [82, 588], page: 9 },
       ],
       inputType: "text",
       renderFieldInPDF: true,
@@ -108,8 +110,8 @@ export const FORM_DATA: Form = {
     },
     city: {
       coordinates: [
-        { coordinate: [383, 193], page: 5 },
-        { coordinate: [61, 563], page: 8 },
+        { coordinate: [383, 193], page: 6 },
+        { coordinate: [61, 563], page: 9 },
       ],
       inputType: "text",
       renderFieldInPDF: true,
@@ -118,8 +120,8 @@ export const FORM_DATA: Form = {
     },
     state: {
       coordinates: [
-        { coordinate: [62, 162], page: 5 },
-        { coordinate: [264, 563], page: 8 },
+        { coordinate: [62, 162], page: 6 },
+        { coordinate: [264, 563], page: 9 },
       ],
       inputType: "text",
       renderFieldInPDF: true,
@@ -181,8 +183,8 @@ export const FORM_DATA: Form = {
     },
     zip: {
       coordinates: [
-        { coordinate: [202, 162], page: 5 },
-        { coordinate: [345, 563], page: 8 },
+        { coordinate: [202, 162], page: 6 },
+        { coordinate: [345, 563], page: 9 },
       ],
       inputType: "number",
       renderFieldInPDF: true,
@@ -190,14 +192,14 @@ export const FORM_DATA: Form = {
       maxCount: 1,
     },
     email: {
-      coordinates: [{ coordinate: [319, 162], page: 5 }],
+      coordinates: [{ coordinate: [319, 162], page: 6 }],
       inputType: "email",
       renderFieldInPDF: true,
       minCount: 1,
       maxCount: 1,
     },
     concat_all_full_names_of_minors: {
-      coordinates: [{ coordinate: [264, 489], page: 6 }],
+      coordinates: [{ coordinate: [264, 489], page: 7 }],
       default: ["minor_full_name"],
       renderFieldInPDF: false,
     },
@@ -205,10 +207,10 @@ export const FORM_DATA: Form = {
     // // First minor choice
     minor_full_name: {
       coordinates: [
-        { coordinate: [120, 462], page: 8 },
-        { coordinate: [120, 428], page: 8 },
-        { coordinate: [120, 392], page: 8 },
-        { coordinate: [120, 356], page: 8 },
+        { coordinate: [120, 462], page: 9 },
+        { coordinate: [120, 428], page: 9 },
+        { coordinate: [120, 392], page: 9 },
+        { coordinate: [120, 356], page: 9 },
       ],
       minCount: 1,
       renderFieldInPDF: true,
@@ -216,10 +218,10 @@ export const FORM_DATA: Form = {
     },
     minor_birthday: {
       coordinates: [
-        { coordinate: [345, 462], page: 8 },
-        { coordinate: [345, 428], page: 8 },
-        { coordinate: [345, 392], page: 8 },
-        { coordinate: [342, 356], page: 8 },
+        { coordinate: [345, 462], page: 9 },
+        { coordinate: [345, 428], page: 9 },
+        { coordinate: [345, 392], page: 9 },
+        { coordinate: [342, 356], page: 9 },
       ],
       minCount: 1,
       renderFieldInPDF: true,
@@ -227,10 +229,10 @@ export const FORM_DATA: Form = {
     },
     minor_relation_to_user: {
       coordinates: [
-        { coordinate: [468, 462], page: 8 },
-        { coordinate: [468, 428], page: 8 },
-        { coordinate: [468, 392], page: 8 },
-        { coordinate: [468, 356], page: 8 },
+        { coordinate: [468, 462], page: 9 },
+        { coordinate: [468, 428], page: 9 },
+        { coordinate: [468, 392], page: 9 },
+        { coordinate: [468, 356], page: 9 },
       ],
       minCount: 1,
       renderFieldInPDF: true,
