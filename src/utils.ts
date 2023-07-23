@@ -34,6 +34,104 @@ function addClickEventToCanvas(e: React.MouseEvent, page: number) {
 }
 
 /**
+ * Hard-coded callbacks
+ *
+ * Note: These are custom methods used by the fields to determine values
+ */
+const callbacks: {
+  [callbackKey: string]: (props: {
+    defaultArray: string[];
+    fields: Fields;
+    formState: FieldState;
+  }) => string;
+} = {
+  getInitialsOfFullName: function ({
+    defaultArray,
+    fields,
+    formState,
+  }: {
+    defaultArray: string[];
+    fields: Fields;
+    formState: FieldState;
+  }) {
+    return defaultArray
+      .map((name) => {
+        const calculatedDefaultValue = calculateDefaultValues({
+          fields,
+          formState,
+          keyOfTheFieldHavingDefaultsCalculated: name,
+        });
+        return `${calculatedDefaultValue[0].toUpperCase()}.`;
+      })
+      .join("");
+  },
+};
+
+/**
+ * Callback for calculating an auto-generated field's value based on its `default` values.
+ *
+ * @param props -
+ * @param props.fields - All fields being interpreted
+ * @param props.formState - The current form's state, these are user generated values known in the fields via the key
+ * @param props.idOrValue - The id (key) of the default used to generate this fields value, could be a hard-coded value, a key (like previously mentioned) of a user written field, or could be the key of another auto generated key based on other fields
+ * @returns
+ */
+function calculateDefaultValues({
+  callback,
+  fields,
+  formState,
+  keyOfTheFieldHavingDefaultsCalculated,
+}: {
+  callback?: string;
+  fields: Fields;
+  formState: FieldState;
+  keyOfTheFieldHavingDefaultsCalculated: string;
+}): string {
+  // First look for identifier's and their user entered data
+  const identifiersValue = formState[keyOfTheFieldHavingDefaultsCalculated];
+  // If we have a value for it, then return it
+  if (identifiersValue) return identifiersValue.join();
+
+  /**
+   * Now this is confusing, if the default is a field that is
+   * auto generated, then this is where we do some extra computation,
+   * so we can check the default's default values and calculate a value
+   * based on that.
+   */
+  if (Object.keys(fields).includes(keyOfTheFieldHavingDefaultsCalculated)) {
+    const defaultsDefaults =
+      fields[keyOfTheFieldHavingDefaultsCalculated].default;
+    const defaultsSeparator =
+      fields[keyOfTheFieldHavingDefaultsCalculated].separator;
+
+    // If we have a callback then let it do all the work
+    if (callback && defaultsDefaults) {
+      return callbacks[callback]?.({
+        defaultArray: defaultsDefaults,
+        fields,
+        formState,
+      });
+    }
+
+    // If the default's default(s) don't have a length then the string should be used.
+    if (defaultsDefaults?.length) {
+      return defaultsDefaults
+        .map((idOrValueForDefaultsOfThisDefault) =>
+          calculateDefaultValues({
+            fields,
+            formState,
+            keyOfTheFieldHavingDefaultsCalculated:
+              idOrValueForDefaultsOfThisDefault,
+          })
+        )
+        .join(defaultsSeparator);
+    }
+  }
+  // Otherwise just return the string
+  return keyOfTheFieldHavingDefaultsCalculated;
+}
+
+/**
  *
  * @param dateString -
  * @returns
@@ -126,7 +224,7 @@ function isUserFieldObject(
  */
 async function loadPdf(): Promise<PDFDocument> {
   const arrayBuffer = await fetch(
-    "/mrwetjet-docusign-alt/pdf/waiver_may_12_2023.pdf"
+    "/mrwetjet-docusign-alt/pdf/waiver_july_22_2023.pdf"
   ).then((res) => res.arrayBuffer());
   const doc = await PDFDocument.load(arrayBuffer);
   return doc;
@@ -213,19 +311,35 @@ async function writeDataToPdf({
 }: WriteDataToPdfProps): Promise<PDFDocument> {
   const signatureFont = await pdf.embedFont(StandardFonts.TimesRomanItalic);
   Object.entries(fields).forEach(([fieldIdentifier, fieldProperties]) => {
-    const { coordinates, default: defaultValue } = fieldProperties;
-    const calculatedDefaultValue = defaultValue
-      ?.map((idOrValue: string) => {
-        // First look for identifier's and their user entered data
-        const identifiersValue = formState[idOrValue];
-        // If we have a value for it, then return it
-        if (identifiersValue) return identifiersValue.join();
-        // Otherwise just return the string
-        return idOrValue;
-      })
-      .join();
+    const {
+      callbackKey,
+      coordinates,
+      default: defaultValue,
+      separator,
+    } = fieldProperties;
 
-    const fieldValue = formState[fieldIdentifier] || calculatedDefaultValue;
+    const callbackCalculatedDefaultValue =
+      callbackKey &&
+      defaultValue &&
+      callbacks[callbackKey]?.({
+        defaultArray: defaultValue,
+        fields,
+        formState,
+      });
+    const calculatedDefaultValue = defaultValue
+      ?.map((idOrValue) =>
+        calculateDefaultValues({
+          fields,
+          formState,
+          keyOfTheFieldHavingDefaultsCalculated: idOrValue,
+        })
+      )
+      .join(separator);
+
+    const fieldValue =
+      callbackCalculatedDefaultValue ||
+      formState[fieldIdentifier] ||
+      calculatedDefaultValue;
 
     if (fieldValue === undefined)
       throw Error("Cannot calculate value for field!");
@@ -255,7 +369,7 @@ async function writeDataToPdf({
 
       page.moveTo(x, y);
       page.drawText(text, {
-        size: 14,
+        size: 12,
         ...(fieldIdentifier.includes("signature") && {
           font: signatureFont,
         }),
@@ -268,6 +382,7 @@ async function writeDataToPdf({
 
 export {
   addClickEventToCanvas,
+  calculateDefaultValues,
   formatDate,
   formatDateTime,
   formatPhoneNumber,

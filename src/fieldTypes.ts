@@ -20,6 +20,10 @@ interface Coordinate {
  */
 interface FieldProperties {
   /**
+   * Key of a callback function which should be found in an object of functions.
+   */
+  callbackKey?: string;
+  /**
    * Array of coordinates
    *
    * @see {Coordinate.coordinate}
@@ -29,6 +33,18 @@ interface FieldProperties {
    * An optional default value used for the field.
    */
   default?: Array<string>;
+  /**
+   * This is how the default values (above) are joined together.
+   *
+   * Specifies a string to separate each pair of adjacent elements of the `default`
+   * array. The separator is converted to a string if necessary. If omitted,
+   * the array elements are separated with a comma (","). If `separator` is
+   * an empty string, all elements are joined without any characters in between
+   * them.
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join
+   */
+  separator?: string;
 }
 
 /**
