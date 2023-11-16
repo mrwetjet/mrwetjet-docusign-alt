@@ -4,6 +4,16 @@ export const FORM_DATA: Form = {
   collections: [
     {
       fieldIdentifiers: [
+        "emergency_name",
+        "emergency_address",
+        "emergency_number",
+      ],
+      minCount: 1,
+      maxCount: 1,
+      title: "Emergency Contact",
+    },
+    {
+      fieldIdentifiers: [
         "minor_full_name",
         "minor_birthday",
         "minor_relation_to_user",
@@ -21,7 +31,7 @@ export const FORM_DATA: Form = {
         { coordinate: [395, 679], page: 4 },
         { coordinate: [469, 155], page: 7 },
         { coordinate: [469, 99], page: 7 },
-        { coordinate: [411, 130], page: 8 },
+        { coordinate: [411, 110], page: 8 },
         { coordinate: [380, 529], page: 9 },
         { coordinate: [448, 489], page: 9 },
         { coordinate: [363, 512], page: 11 },
@@ -158,7 +168,7 @@ export const FORM_DATA: Form = {
         { coordinate: [62, 50], page: 1 },
         { coordinate: [335, 185], page: 3 },
         { coordinate: [135, 99], page: 7 },
-        { coordinate: [134, 130], page: 8 },
+        { coordinate: [134, 110], page: 8 },
         { coordinate: [38, 529], page: 9 },
         { coordinate: [38, 489], page: 9 },
         { coordinate: [92, 512], page: 11 },
@@ -292,7 +302,7 @@ export const FORM_DATA: Form = {
       renderFieldInPDF: false,
     },
 
-    // // First minor choice
+    // First minor choice
     minor_full_name: {
       coordinates: [
         { coordinate: [120, 462], page: 11 },
@@ -325,6 +335,45 @@ export const FORM_DATA: Form = {
       minCount: 1,
       renderFieldInPDF: true,
       inputType: "text",
+    },
+
+    // Emergency contact info
+    emergency_name: {
+      coordinates: [{ coordinate: [150, 528], page: 4 }],
+      minCount: 1,
+      renderFieldInPDF: true,
+      inputType: "text",
+    },
+    emergency_address: {
+      coordinates: [{ coordinate: [160, 500], page: 4 }],
+      minCount: 1,
+      renderFieldInPDF: true,
+      inputType: "text",
+    },
+    emergency_number: {
+      coordinates: [{ coordinate: [180, 472], page: 4 }],
+      minCount: 1,
+      renderFieldInPDF: true,
+      inputType: "tel",
+    },
+
+    // Return time
+    return_time: {
+      coordinates: [{ coordinate: [400, 420], page: 5 }],
+      inputType: "time",
+      renderFieldInPDF: true,
+      minCount: 1,
+      maxCount: 1,
+    },
+
+    // Persons on boat
+    number_of_people_riding_your_jetski: {
+      coordinates: [{ coordinate: [62, 130], page: 8 }],
+      inputType: "number",
+      renderFieldInPDF: true,
+      minCount: 1,
+      maxCount: 1,
+      hasValues: ["1", "2"],
     },
   },
   title: "Rental Agreement",
