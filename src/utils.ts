@@ -224,7 +224,7 @@ function isUserFieldObject(
  */
 async function loadPdf(): Promise<PDFDocument> {
   const arrayBuffer = await fetch(
-    "/mrwetjet-docusign-alt/pdf/waiver_nov_15_2023.pdf"
+    "/mrwetjet-docusign-alt/pdf/FINAL-WAIVER-12.29.23.pdf"
   ).then((res) => res.arrayBuffer());
   const doc = await PDFDocument.load(arrayBuffer);
   return doc;
