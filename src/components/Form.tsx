@@ -206,12 +206,13 @@ export default function Form({ onPdfSubmit }: Props) {
     if (pdfBytes) {
       const userEmail = formState.email[0];
       const fullName = calculateDefaultValues({
+        coordinates: [],
         fields: FORM_DATA.fields,
         formState,
         keyOfTheFieldHavingDefaultsCalculated: "full_name",
       });
       if (!(userEmail && fullName)) throw Error("Must have an email and name!");
-      onPdfSubmit({ pdf: pdfBytes, userEmail, userName: fullName });
+      onPdfSubmit({ pdf: pdfBytes, userEmail, userName: fullName as string });
     }
   };
 

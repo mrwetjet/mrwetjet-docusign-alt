@@ -33,7 +33,7 @@ export const FORM_DATA: Form = {
         { coordinate: [469, 99], page: 7 },
         { coordinate: [411, 110], page: 8 },
         { coordinate: [380, 529], page: 9 },
-        { coordinate: [380, 700], page: 9 },
+        { coordinate: [380, 235], page: 9 },
         { coordinate: [363, 512], page: 11 },
       ],
       default: [new Date().toLocaleDateString()],
@@ -170,6 +170,7 @@ export const FORM_DATA: Form = {
         { coordinate: [135, 99], page: 7 },
         { coordinate: [134, 110], page: 8 },
         { coordinate: [38, 529], page: 9 },
+        { coordinate: [38, 235], page: 9 },
         { coordinate: [92, 512], page: 11 },
       ],
       default: ["full_name"],
@@ -296,11 +297,12 @@ export const FORM_DATA: Form = {
       maxCount: 1,
     },
     concat_all_full_names_of_minors: {
+      callbackKey: "getMinorFullName",
       coordinates: [
-        { coordinate: [100, 250], page: 9 }
-        { coordinate: [100, 300], page: 9 }
-        { coordinate: [100, 350], page: 9 }
-        { coordinate: [100, 400], page: 9 }
+        { coordinate: [38, 450], page: 9 },
+        { coordinate: [38, 400], page: 9 },
+        { coordinate: [38, 350], page: 9 },
+        { coordinate: [38, 300], page: 9 },
       ],
       default: ["minor_full_name"],
       renderFieldInPDF: false,

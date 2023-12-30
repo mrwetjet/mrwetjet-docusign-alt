@@ -1,7 +1,7 @@
 /**
  * PDF coordinate
  */
-interface Coordinate {
+export interface Coordinate {
   /**
    * The coordinate is arranged [x, y], where `x` is the number of pixels from the left
    * and `y` is the number of pixels from the bottom.
