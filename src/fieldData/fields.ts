@@ -33,6 +33,7 @@ export const FORM_DATA: Form = {
         { coordinate: [469, 99], page: 7 },
         { coordinate: [411, 110], page: 8 },
         { coordinate: [380, 529], page: 9 },
+        { coordinate: [380, 700], page: 9 },
         { coordinate: [363, 512], page: 11 },
       ],
       default: [new Date().toLocaleDateString()],
