@@ -295,7 +295,12 @@ export const FORM_DATA: Form = {
       maxCount: 1,
     },
     concat_all_full_names_of_minors: {
-      coordinates: [{ coordinate: [264, 489], page: 9 }],
+      coordinates: [
+        { coordinate: [100, 250], page: 9 }
+        { coordinate: [100, 300], page: 9 }
+        { coordinate: [100, 350], page: 9 }
+        { coordinate: [100, 400], page: 9 }
+      ],
       default: ["minor_full_name"],
       renderFieldInPDF: false,
     },
